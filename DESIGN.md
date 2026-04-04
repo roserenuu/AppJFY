@@ -1,8 +1,8 @@
-# Design System: roserenuu
+# Design System: Rose Renuu
 
 ## 1. Visual Theme & Atmosphere
 
-roserenuu is a personal UGC creator portfolio designed to attract brand deals. The design philosophy is **bold confidence meets editorial clarity** — a site that feels like a premium media kit, not a generic freelancer template. It balances the personality of a content creator with the trust signals brands need to commit to a partnership.
+Rose Renuu is a personal UGC creator portfolio designed to attract brand deals. The design philosophy is **bold confidence meets editorial clarity** — a site that feels like a premium media kit, not a generic freelancer template. It balances the personality of a content creator with the trust signals brands need to commit to a partnership.
 
 The palette is built on a near-white canvas (`#fafaf9`) that avoids the clinical coldness of pure white. The primary accent is an electric coral-orange (`#FF4D2D`) — energetic and memorable, cutting through the noise without feeling garish. Dark surfaces use a near-black with warm undertones (`#111110`) rather than pure black, keeping the contrast human rather than harsh.
 
