@@ -1,0 +1,623 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>AppJFY — Design System Preview</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=JetBrains+Mono:wght@700;800&display=swap" rel="stylesheet" />
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      --canvas:       #fafaf9;
+      --surface:      #f4f3f1;
+      --white:        #ffffff;
+      --black:        #111110;
+      --mid:          #6b6b6b;
+      --muted:        #9b9b9b;
+      --rule:         #e8e7e5;
+      --coral:        #FF4D2D;
+      --coral-dark:   #D93A1E;
+      --coral-pale:   #FFF1EE;
+      --border:       rgba(0,0,0,0.08);
+      --shadow-card:  rgba(0,0,0,0.05) 0px 2px 12px, rgba(0,0,0,0.03) 0px 1px 4px;
+      --shadow-hover: rgba(0,0,0,0.08) 0px 8px 24px, rgba(0,0,0,0.04) 0px 2px 8px;
+    }
+
+    body {
+      font-family: 'Inter', -apple-system, sans-serif;
+      background: var(--canvas);
+      color: var(--black);
+      line-height: 1.6;
+    }
+
+    /* ── NAV ── */
+    nav {
+      position: sticky; top: 0; z-index: 100;
+      background: var(--white);
+      border-bottom: 1px solid var(--border);
+      padding: 0 48px;
+      display: flex; align-items: center; justify-content: space-between;
+      height: 60px;
+    }
+    .nav-logo { font-size: 18px; font-weight: 800; letter-spacing: -0.5px; }
+    .nav-links { display: flex; gap: 28px; }
+    .nav-links a {
+      font-size: 15px; font-weight: 500; color: var(--mid);
+      text-decoration: none; transition: color .15s;
+    }
+    .nav-links a:hover { color: var(--black); }
+    .nav-links a.active { color: var(--coral); }
+    .btn-primary {
+      background: var(--coral); color: #fff;
+      font-family: inherit; font-size: 15px; font-weight: 600;
+      padding: 10px 20px; border: none; border-radius: 6px;
+      cursor: pointer; transition: background .15s, transform .1s, box-shadow .15s;
+    }
+    .btn-primary:hover { background: var(--coral-dark); transform: translateY(-1px); box-shadow: var(--shadow-hover); }
+    .btn-primary:active { transform: scale(0.98); }
+
+    /* ── SECTIONS ── */
+    .section { padding: 80px 48px; max-width: 1100px; margin: 0 auto; }
+    .section-alt { background: var(--surface); }
+    .section-alt .section { background: transparent; }
+    .section-wrap { width: 100%; }
+    .section-wrap.alt { background: var(--surface); }
+
+    .eyebrow {
+      font-size: 12px; font-weight: 600; letter-spacing: 0.1em;
+      text-transform: uppercase; color: var(--coral);
+      margin-bottom: 12px;
+    }
+    .section-title {
+      font-size: 48px; font-weight: 800; line-height: 1.05;
+      letter-spacing: -1.5px; margin-bottom: 16px;
+    }
+    .section-sub {
+      font-size: 18px; font-weight: 400; color: var(--mid);
+      max-width: 560px; line-height: 1.6; margin-bottom: 48px;
+    }
+    hr.rule { border: none; border-top: 1px solid var(--rule); margin: 0; }
+
+    /* ── HERO ── */
+    .hero {
+      padding: 120px 48px 96px;
+      max-width: 1100px; margin: 0 auto;
+      display: flex; flex-direction: column; align-items: flex-start;
+    }
+    .hero-tag {
+      background: var(--coral-pale); color: var(--coral);
+      font-size: 12px; font-weight: 600; letter-spacing: 0.1em;
+      text-transform: uppercase; padding: 4px 10px; border-radius: 4px;
+      display: inline-block; margin-bottom: 20px;
+    }
+    .hero h1 {
+      font-size: 60px; font-weight: 800; line-height: 1.0;
+      letter-spacing: -2px; max-width: 700px; margin-bottom: 20px;
+    }
+    .hero h1 span { color: var(--coral); }
+    .hero p {
+      font-size: 20px; font-weight: 400; color: var(--mid);
+      max-width: 520px; line-height: 1.6; margin-bottom: 36px;
+    }
+    .hero-btns { display: flex; gap: 12px; flex-wrap: wrap; }
+    .btn-outline {
+      background: transparent; color: var(--black);
+      font-family: inherit; font-size: 15px; font-weight: 600;
+      padding: 10px 20px; border: 1.5px solid var(--black); border-radius: 6px;
+      cursor: pointer; transition: background .15s, color .15s;
+    }
+    .btn-outline:hover { background: var(--black); color: #fff; }
+
+    /* ── STATS ── */
+    .stats-grid {
+      display: grid; grid-template-columns: repeat(4, 1fr); gap: 16px;
+    }
+    .stat-card {
+      background: var(--white); border: 1px solid var(--border);
+      border-radius: 10px; padding: 24px;
+    }
+    .stat-num {
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 42px; font-weight: 800;
+      letter-spacing: -1.5px; color: var(--black);
+      line-height: 1; margin-bottom: 8px;
+    }
+    .stat-label {
+      font-size: 13px; font-weight: 600;
+      letter-spacing: 0.08em; text-transform: uppercase; color: var(--muted);
+    }
+
+    /* ── PORTFOLIO GRID ── */
+    .portfolio-grid {
+      display: grid; grid-template-columns: repeat(3, 1fr); gap: 20px;
+    }
+    .portfolio-card {
+      position: relative;
+      background: var(--white); border: 1px solid var(--border);
+      border-radius: 12px; overflow: hidden;
+      box-shadow: var(--shadow-card);
+      aspect-ratio: 9/16;
+      transition: transform .2s, box-shadow .2s;
+      cursor: pointer;
+    }
+    .portfolio-card:hover { transform: translateY(-2px); box-shadow: var(--shadow-hover); }
+    .portfolio-card .card-bg {
+      position: absolute; inset: 0;
+      display: flex; align-items: center; justify-content: center;
+      font-size: 40px;
+    }
+    .portfolio-card .card-overlay {
+      position: absolute; inset: 0; background: rgba(17,17,16,0);
+      display: flex; align-items: center; justify-content: center;
+      transition: background .2s;
+    }
+    .portfolio-card:hover .card-overlay { background: rgba(17,17,16,0.35); }
+    .portfolio-card .card-overlay svg { opacity: 0; transition: opacity .2s; }
+    .portfolio-card:hover .card-overlay svg { opacity: 1; }
+    .portfolio-card .card-meta {
+      position: absolute; bottom: 0; left: 0; right: 0;
+      padding: 16px; background: linear-gradient(transparent, rgba(17,17,16,0.7));
+    }
+    .portfolio-card .card-title { font-size: 14px; font-weight: 600; color: #fff; }
+    .portfolio-card .card-tag {
+      display: inline-block; margin-bottom: 4px;
+      font-size: 11px; font-weight: 600; letter-spacing: 0.08em;
+      text-transform: uppercase; color: var(--coral);
+      background: rgba(255,77,45,0.2); padding: 2px 8px; border-radius: 3px;
+    }
+    .bg-beauty  { background: linear-gradient(135deg,#fde4cf,#f9c5c5); }
+    .bg-tech    { background: linear-gradient(135deg,#c8e6ff,#d9d4ff); }
+    .bg-life    { background: linear-gradient(135deg,#d4f5e1,#d4f1f9); }
+    .bg-food    { background: linear-gradient(135deg,#fef3c7,#fde68a); }
+    .bg-fitness { background: linear-gradient(135deg,#fee2e2,#fecaca); }
+    .bg-travel  { background: linear-gradient(135deg,#e0f2fe,#bae6fd); }
+
+    /* ── BRAND LOGOS ── */
+    .brands-grid {
+      display: grid; grid-template-columns: repeat(5, 1fr); gap: 12px;
+    }
+    .brand-card {
+      background: var(--white); border: 1px solid var(--border);
+      border-radius: 8px; padding: 20px 28px;
+      display: flex; align-items: center; justify-content: center;
+      filter: grayscale(1); opacity: 0.5;
+      transition: filter .2s, opacity .2s;
+      cursor: default;
+    }
+    .brand-card:hover { filter: grayscale(0); opacity: 1; }
+    .brand-card span {
+      font-size: 16px; font-weight: 700; letter-spacing: -0.5px; color: var(--black);
+    }
+
+    /* ── TESTIMONIALS ── */
+    .testimonial-grid {
+      display: grid; grid-template-columns: repeat(2, 1fr); gap: 20px;
+    }
+    .testimonial-card {
+      background: var(--surface); border-radius: 12px; padding: 28px 32px;
+      border-left: 3px solid var(--coral);
+    }
+    .testimonial-quote {
+      font-size: 18px; font-weight: 400; line-height: 1.6; color: var(--black);
+      margin-bottom: 16px;
+    }
+    .testimonial-quote::before { content: '\201C'; color: var(--coral); font-size: 1.2em; }
+    .testimonial-quote::after  { content: '\201D'; color: var(--coral); font-size: 1.2em; }
+    .testimonial-attr { font-size: 14px; font-weight: 600; color: var(--mid); }
+    .testimonial-attr span { color: var(--muted); font-weight: 400; }
+
+    /* ── DESIGN TOKENS ── */
+    .token-section h3 {
+      font-size: 18px; font-weight: 700; margin-bottom: 16px; letter-spacing: -0.3px;
+    }
+    .color-swatches {
+      display: flex; flex-wrap: wrap; gap: 12px; margin-bottom: 40px;
+    }
+    .swatch {
+      display: flex; flex-direction: column; gap: 6px; min-width: 80px;
+    }
+    .swatch-box {
+      width: 80px; height: 56px; border-radius: 8px;
+      border: 1px solid var(--border);
+    }
+    .swatch-name { font-size: 11px; font-weight: 600; color: var(--black); }
+    .swatch-hex  { font-size: 10px; color: var(--muted); font-family: monospace; }
+
+    .type-row {
+      display: flex; align-items: baseline; gap: 16px;
+      padding: 14px 0; border-bottom: 1px solid var(--rule);
+    }
+    .type-row:last-child { border-bottom: none; }
+    .type-meta { min-width: 180px; font-size: 12px; color: var(--muted); }
+    .type-sample { color: var(--black); }
+
+    .btn-row { display: flex; align-items: center; gap: 12px; flex-wrap: wrap; margin-bottom: 32px; }
+    .btn-ghost {
+      background: transparent; color: var(--coral);
+      font-family: inherit; font-size: 15px; font-weight: 500;
+      padding: 10px 0; border: none; cursor: pointer;
+      text-decoration: underline; text-decoration-color: transparent;
+      text-underline-offset: 3px; transition: text-decoration-color .15s;
+    }
+    .btn-ghost:hover { text-decoration-color: var(--coral); }
+    .btn-tag {
+      background: var(--coral-pale); color: var(--coral);
+      font-family: inherit; font-size: 12px; font-weight: 600;
+      letter-spacing: 0.05em; text-transform: uppercase;
+      padding: 4px 10px; border: none; border-radius: 4px; cursor: pointer;
+    }
+
+    /* ── CONTACT ── */
+    .contact-form { max-width: 520px; }
+    .form-group { margin-bottom: 20px; }
+    .form-group label {
+      display: block; font-size: 14px; font-weight: 600; margin-bottom: 6px;
+    }
+    .form-group input, .form-group textarea {
+      width: 100%; background: var(--white);
+      border: 1px solid rgba(0,0,0,0.15); border-radius: 8px;
+      padding: 12px 16px; font-family: inherit; font-size: 16px;
+      color: var(--black); transition: border-color .15s, box-shadow .15s;
+      outline: none;
+    }
+    .form-group input::placeholder, .form-group textarea::placeholder { color: var(--muted); }
+    .form-group input:focus, .form-group textarea:focus {
+      border-color: var(--coral);
+      box-shadow: 0 0 0 3px rgba(255,77,45,0.12);
+    }
+    .form-group textarea { resize: vertical; min-height: 120px; }
+
+    /* ── FOOTER ── */
+    footer {
+      background: var(--black); color: var(--white);
+      padding: 40px 48px; text-align: center;
+    }
+    footer .footer-name { font-size: 20px; font-weight: 800; letter-spacing: -0.5px; }
+    footer .footer-sub { font-size: 14px; color: rgba(255,255,255,0.4); margin-top: 6px; }
+
+    /* ── AVAILABILITY PILL ── */
+    .avail-pill {
+      display: inline-flex; align-items: center; gap: 6px;
+      background: #f0fdf4; color: #16a34a;
+      font-size: 12px; font-weight: 600; letter-spacing: 0.03em;
+      padding: 5px 12px; border-radius: 9999px;
+      border: 1px solid rgba(22,163,74,0.2);
+      margin-bottom: 20px;
+    }
+    .avail-dot {
+      width: 7px; height: 7px; border-radius: 50%; background: #16a34a;
+      animation: pulse 2s infinite;
+    }
+    @keyframes pulse {
+      0%, 100% { opacity: 1; }
+      50% { opacity: 0.4; }
+    }
+
+    /* ── SECTION PAGE-LABEL ── */
+    .page-label {
+      font-size: 11px; font-weight: 600; letter-spacing: 0.12em;
+      text-transform: uppercase; color: var(--muted);
+      margin-bottom: 48px;
+      border-bottom: 1px solid var(--rule); padding-bottom: 12px;
+    }
+  </style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav>
+  <div class="nav-logo">AppJFY</div>
+  <div class="nav-links">
+    <a href="#" class="active">Portfolio</a>
+    <a href="#">About</a>
+    <a href="#">Services</a>
+    <a href="#">Contact</a>
+  </div>
+  <button class="btn-primary">Work With Me</button>
+</nav>
+
+<!-- HERO -->
+<div>
+  <div class="hero">
+    <div class="avail-pill">
+      <div class="avail-dot"></div>
+      Available for brand deals
+    </div>
+    <div class="hero-tag">UGC Creator</div>
+    <h1>Content that <span>converts.</span></h1>
+    <p>I create authentic, scroll-stopping UGC for brands that want real engagement — not just impressions.</p>
+    <div class="hero-btns">
+      <button class="btn-primary">Work With Me</button>
+      <button class="btn-outline">View Portfolio</button>
+    </div>
+  </div>
+</div>
+
+<hr class="rule" />
+
+<!-- STATS -->
+<div>
+  <div class="section">
+    <div class="page-label">By the numbers</div>
+    <div class="stats-grid">
+      <div class="stat-card">
+        <div class="stat-num">2.4M</div>
+        <div class="stat-label">Total Followers</div>
+      </div>
+      <div class="stat-card">
+        <div class="stat-num">8.3%</div>
+        <div class="stat-label">Avg Engagement</div>
+      </div>
+      <div class="stat-card">
+        <div class="stat-num">120+</div>
+        <div class="stat-label">Brand Collabs</div>
+      </div>
+      <div class="stat-card">
+        <div class="stat-num">4.9★</div>
+        <div class="stat-label">Brand Rating</div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<hr class="rule" />
+
+<!-- PORTFOLIO -->
+<div class="section-wrap">
+  <div class="section">
+    <div class="eyebrow">Recent Work</div>
+    <h2 class="section-title">Content Portfolio</h2>
+    <p class="section-sub">A curated selection of UGC across beauty, tech, lifestyle, and more.</p>
+    <div class="portfolio-grid">
+      <div class="portfolio-card">
+        <div class="card-bg bg-beauty">🧴</div>
+        <div class="card-overlay">
+          <svg width="36" height="36" viewBox="0 0 24 24" fill="white"><path d="M8 5v14l11-7z"/></svg>
+        </div>
+        <div class="card-meta">
+          <div class="card-tag">Beauty</div>
+          <div class="card-title">Skincare Routine Reel</div>
+        </div>
+      </div>
+      <div class="portfolio-card">
+        <div class="card-bg bg-tech">💻</div>
+        <div class="card-overlay">
+          <svg width="36" height="36" viewBox="0 0 24 24" fill="white"><path d="M8 5v14l11-7z"/></svg>
+        </div>
+        <div class="card-meta">
+          <div class="card-tag">Tech</div>
+          <div class="card-title">Product Unboxing</div>
+        </div>
+      </div>
+      <div class="portfolio-card">
+        <div class="card-bg bg-life">🌿</div>
+        <div class="card-overlay">
+          <svg width="36" height="36" viewBox="0 0 24 24" fill="white"><path d="M8 5v14l11-7z"/></svg>
+        </div>
+        <div class="card-meta">
+          <div class="card-tag">Lifestyle</div>
+          <div class="card-title">Day in My Life</div>
+        </div>
+      </div>
+      <div class="portfolio-card">
+        <div class="card-bg bg-food">🍜</div>
+        <div class="card-overlay">
+          <svg width="36" height="36" viewBox="0 0 24 24" fill="white"><path d="M8 5v14l11-7z"/></svg>
+        </div>
+        <div class="card-meta">
+          <div class="card-tag">Food</div>
+          <div class="card-title">Recipe Integration</div>
+        </div>
+      </div>
+      <div class="portfolio-card">
+        <div class="card-bg bg-fitness">💪</div>
+        <div class="card-overlay">
+          <svg width="36" height="36" viewBox="0 0 24 24" fill="white"><path d="M8 5v14l11-7z"/></svg>
+        </div>
+        <div class="card-meta">
+          <div class="card-tag">Fitness</div>
+          <div class="card-title">Gym Supplement Ad</div>
+        </div>
+      </div>
+      <div class="portfolio-card">
+        <div class="card-bg bg-travel">✈️</div>
+        <div class="card-overlay">
+          <svg width="36" height="36" viewBox="0 0 24 24" fill="white"><path d="M8 5v14l11-7z"/></svg>
+        </div>
+        <div class="card-meta">
+          <div class="card-tag">Travel</div>
+          <div class="card-title">Hotel Walkthrough</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<hr class="rule" />
+
+<!-- BRANDS -->
+<div class="section-wrap alt">
+  <div class="section">
+    <div class="eyebrow">Past Clients</div>
+    <h2 class="section-title">Brands I've worked with</h2>
+    <p class="section-sub" style="margin-bottom:40px;">Hover to reveal.</p>
+    <div class="brands-grid">
+      <div class="brand-card"><span>Sephora</span></div>
+      <div class="brand-card"><span>Nike</span></div>
+      <div class="brand-card"><span>Amazon</span></div>
+      <div class="brand-card"><span>Glossier</span></div>
+      <div class="brand-card"><span>Apple</span></div>
+      <div class="brand-card"><span>Fenty</span></div>
+      <div class="brand-card"><span>Lululemon</span></div>
+      <div class="brand-card"><span>Spotify</span></div>
+      <div class="brand-card"><span>Dyson</span></div>
+      <div class="brand-card"><span>Oura</span></div>
+    </div>
+  </div>
+</div>
+
+<hr class="rule" />
+
+<!-- TESTIMONIALS -->
+<div>
+  <div class="section">
+    <div class="eyebrow">Social Proof</div>
+    <h2 class="section-title">What brands say</h2>
+    <p class="section-sub">Real feedback from real partnerships.</p>
+    <div class="testimonial-grid">
+      <div class="testimonial-card">
+        <p class="testimonial-quote">The content felt completely natural — our audience didn't even clock it was a partnership. Conversions were up 34% that week.</p>
+        <div class="testimonial-attr">Sarah K. <span>— Brand Manager, Glossier</span></div>
+      </div>
+      <div class="testimonial-card">
+        <p class="testimonial-quote">Delivered everything ahead of schedule, understood the brief perfectly, and the final videos were exactly what we needed for our launch.</p>
+        <div class="testimonial-attr">Marcus T. <span>— Head of Social, Nike</span></div>
+      </div>
+      <div class="testimonial-card">
+        <p class="testimonial-quote">We've worked with dozens of creators but AppJFY is in our top 3 for engagement quality. Will absolutely book again.</p>
+        <div class="testimonial-attr">Priya N. <span>— Partnerships Lead, Amazon</span></div>
+      </div>
+      <div class="testimonial-card">
+        <p class="testimonial-quote">Authentic, creative, and professional. The kind of creator every brand wishes they found sooner.</p>
+        <div class="testimonial-attr">Jamie L. <span>— Marketing Director, Sephora</span></div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<hr class="rule" />
+
+<!-- DESIGN TOKENS (reference section) -->
+<div class="section-wrap alt">
+  <div class="section">
+    <div class="eyebrow">Design System</div>
+    <h2 class="section-title">Visual Tokens</h2>
+    <p class="section-sub" style="margin-bottom:48px;">Reference palette, typography, and component states.</p>
+
+    <div class="token-section">
+      <h3>Color Palette</h3>
+      <div class="color-swatches">
+        <div class="swatch">
+          <div class="swatch-box" style="background:#111110;"></div>
+          <div class="swatch-name">Near-Black</div>
+          <div class="swatch-hex">#111110</div>
+        </div>
+        <div class="swatch">
+          <div class="swatch-box" style="background:#fafaf9; border:1px solid #e8e7e5;"></div>
+          <div class="swatch-name">Canvas</div>
+          <div class="swatch-hex">#fafaf9</div>
+        </div>
+        <div class="swatch">
+          <div class="swatch-box" style="background:#f4f3f1;"></div>
+          <div class="swatch-name">Surface</div>
+          <div class="swatch-hex">#f4f3f1</div>
+        </div>
+        <div class="swatch">
+          <div class="swatch-box" style="background:#FF4D2D;"></div>
+          <div class="swatch-name">Coral</div>
+          <div class="swatch-hex">#FF4D2D</div>
+        </div>
+        <div class="swatch">
+          <div class="swatch-box" style="background:#D93A1E;"></div>
+          <div class="swatch-name">Coral Dark</div>
+          <div class="swatch-hex">#D93A1E</div>
+        </div>
+        <div class="swatch">
+          <div class="swatch-box" style="background:#FFF1EE;"></div>
+          <div class="swatch-name">Coral Pale</div>
+          <div class="swatch-hex">#FFF1EE</div>
+        </div>
+        <div class="swatch">
+          <div class="swatch-box" style="background:#6b6b6b;"></div>
+          <div class="swatch-name">Mid Gray</div>
+          <div class="swatch-hex">#6b6b6b</div>
+        </div>
+        <div class="swatch">
+          <div class="swatch-box" style="background:#9b9b9b;"></div>
+          <div class="swatch-name">Muted Gray</div>
+          <div class="swatch-hex">#9b9b9b</div>
+        </div>
+      </div>
+
+      <h3>Typography Scale</h3>
+      <div style="margin-bottom: 40px;">
+        <div class="type-row">
+          <div class="type-meta">Display / 60px 800</div>
+          <div class="type-sample" style="font-size:48px;font-weight:800;line-height:1;letter-spacing:-2px;">AppJFY</div>
+        </div>
+        <div class="type-row">
+          <div class="type-meta">Section / 48px 800</div>
+          <div class="type-sample" style="font-size:36px;font-weight:800;line-height:1.05;letter-spacing:-1.5px;">Content Portfolio</div>
+        </div>
+        <div class="type-row">
+          <div class="type-meta">Headline / 36px 700</div>
+          <div class="type-sample" style="font-size:28px;font-weight:700;letter-spacing:-1px;">UGC Creator &amp; Brand Partner</div>
+        </div>
+        <div class="type-row">
+          <div class="type-meta">Sub-heading / 20px 600</div>
+          <div class="type-sample" style="font-size:20px;font-weight:600;letter-spacing:-0.25px;">Available for brand collaborations</div>
+        </div>
+        <div class="type-row">
+          <div class="type-meta">Body / 16px 400</div>
+          <div class="type-sample" style="font-size:16px;font-weight:400;">I create authentic, scroll-stopping content for brands that want real engagement.</div>
+        </div>
+        <div class="type-row">
+          <div class="type-meta">Label / 12px 600 UPPER</div>
+          <div class="type-sample" style="font-size:12px;font-weight:600;letter-spacing:0.1em;text-transform:uppercase;color:#FF4D2D;">Recent Work</div>
+        </div>
+        <div class="type-row">
+          <div class="type-meta">Metric / 42px 800 mono</div>
+          <div class="type-sample" style="font-family:'JetBrains Mono',monospace;font-size:36px;font-weight:800;letter-spacing:-1.5px;">2.4M</div>
+        </div>
+      </div>
+
+      <h3>Buttons &amp; Tags</h3>
+      <div class="btn-row">
+        <button class="btn-primary">Work With Me</button>
+        <button class="btn-outline">View Portfolio</button>
+        <button class="btn-ghost">See all work →</button>
+        <button class="btn-tag">Beauty</button>
+        <button class="btn-tag">Lifestyle</button>
+        <button class="btn-tag">Tech</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<hr class="rule" />
+
+<!-- CONTACT -->
+<div>
+  <div class="section">
+    <div class="eyebrow">Get in Touch</div>
+    <h2 class="section-title">Let's work together</h2>
+    <p class="section-sub">Tell me about your brand and campaign goals. I'll get back within 24 hours.</p>
+    <div class="contact-form">
+      <div class="form-group">
+        <label>Your Name</label>
+        <input type="text" placeholder="Jane Smith" />
+      </div>
+      <div class="form-group">
+        <label>Brand / Company</label>
+        <input type="text" placeholder="Acme Co." />
+      </div>
+      <div class="form-group">
+        <label>Campaign Brief</label>
+        <textarea placeholder="Tell me about your product, goals, and timeline..."></textarea>
+      </div>
+      <button class="btn-primary" style="width:100%;padding:14px;font-size:16px;">Send Message</button>
+    </div>
+  </div>
+</div>
+
+<!-- FOOTER -->
+<footer>
+  <div class="footer-name">AppJFY</div>
+  <div class="footer-sub">UGC Creator · Available for brand deals</div>
+</footer>
+
+</body>
+</html>
