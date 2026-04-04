@@ -313,34 +313,42 @@
       }
       .nav-links { display: none; }
 
-      .section { padding: 48px 20px; }
+      .section {
+        padding: 48px 20px;
+        width: 100%;
+        overflow: hidden;
+      }
 
-      .hero { padding: 64px 20px 48px; }
-      .hero h1 { font-size: 36px; letter-spacing: -1px; }
-      .hero p  { font-size: 17px; }
+      .hero { padding: 56px 20px 40px; }
+      .hero h1 { font-size: 34px; letter-spacing: -1px; max-width: 100%; }
+      .hero p  { font-size: 16px; max-width: 100%; }
 
-      .section-title { font-size: 30px; letter-spacing: -0.75px; }
-      .section-sub   { font-size: 16px; margin-bottom: 32px; }
+      .section-title { font-size: 28px; letter-spacing: -0.5px; }
+      .section-sub   { font-size: 15px; margin-bottom: 28px; max-width: 100%; }
 
-      .stats-grid { grid-template-columns: repeat(2, 1fr); gap: 12px; }
-      .stat-num   { font-size: 30px; }
+      .stats-grid { grid-template-columns: repeat(2, 1fr); gap: 10px; }
+      .stat-num   { font-size: 28px; letter-spacing: -0.5px; }
+      .stat-label { font-size: 11px; }
 
-      .portfolio-grid { grid-template-columns: repeat(2, 1fr); gap: 12px; }
+      .portfolio-grid { grid-template-columns: repeat(2, 1fr); gap: 10px; }
 
-      .brands-grid { grid-template-columns: repeat(2, 1fr); gap: 10px; }
-      .brand-card  { padding: 16px; filter: grayscale(0); opacity: 1; }
+      .brands-grid { grid-template-columns: repeat(2, 1fr); gap: 8px; }
+      .brand-card  { padding: 14px 12px; filter: grayscale(0); opacity: 1; }
+      .brand-card span { font-size: 13px; }
 
       .testimonial-grid { grid-template-columns: 1fr; }
-      .testimonial-card { padding: 20px 20px 20px 24px; }
-      .testimonial-quote { font-size: 16px; }
+      .testimonial-card { padding: 18px 18px 18px 20px; }
+      .testimonial-quote { font-size: 15px; }
 
-      .type-row { flex-direction: column; gap: 6px; }
-      .type-meta { min-width: unset; }
-      .type-sample[style*="font-size:48px"] { font-size: 32px !important; }
-      .type-sample[style*="font-size:36px"] { font-size: 24px !important; }
-      .type-sample[style*="font-size:28px"] { font-size: 20px !important; }
+      /* Hide the design tokens section on mobile — it's a dev reference */
+      .section-wrap.alt:last-of-type { display: none; }
 
-      footer { padding: 32px 20px; }
+      .contact-form { max-width: 100%; }
+
+      footer { padding: 28px 20px; }
+
+      /* Prevent any element from blowing out the viewport */
+      * { max-width: 100%; }
     }
   </style>
 </head>
