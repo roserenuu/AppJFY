@@ -9,6 +9,7 @@
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=JetBrains+Mono:wght@700;800&display=swap" rel="stylesheet" />
   <style>
     *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    html, body { overflow-x: hidden; max-width: 100%; }
 
     :root {
       --canvas:       #fafaf9;
@@ -302,6 +303,44 @@
       text-transform: uppercase; color: var(--muted);
       margin-bottom: 48px;
       border-bottom: 1px solid var(--rule); padding-bottom: 12px;
+    }
+
+    /* ── MOBILE ── */
+    @media (max-width: 640px) {
+      nav {
+        padding: 0 20px;
+        height: 56px;
+      }
+      .nav-links { display: none; }
+
+      .section { padding: 48px 20px; }
+
+      .hero { padding: 64px 20px 48px; }
+      .hero h1 { font-size: 36px; letter-spacing: -1px; }
+      .hero p  { font-size: 17px; }
+
+      .section-title { font-size: 30px; letter-spacing: -0.75px; }
+      .section-sub   { font-size: 16px; margin-bottom: 32px; }
+
+      .stats-grid { grid-template-columns: repeat(2, 1fr); gap: 12px; }
+      .stat-num   { font-size: 30px; }
+
+      .portfolio-grid { grid-template-columns: repeat(2, 1fr); gap: 12px; }
+
+      .brands-grid { grid-template-columns: repeat(2, 1fr); gap: 10px; }
+      .brand-card  { padding: 16px; filter: grayscale(0); opacity: 1; }
+
+      .testimonial-grid { grid-template-columns: 1fr; }
+      .testimonial-card { padding: 20px 20px 20px 24px; }
+      .testimonial-quote { font-size: 16px; }
+
+      .type-row { flex-direction: column; gap: 6px; }
+      .type-meta { min-width: unset; }
+      .type-sample[style*="font-size:48px"] { font-size: 32px !important; }
+      .type-sample[style*="font-size:36px"] { font-size: 24px !important; }
+      .type-sample[style*="font-size:28px"] { font-size: 20px !important; }
+
+      footer { padding: 32px 20px; }
     }
   </style>
 </head>
