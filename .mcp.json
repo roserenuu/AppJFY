@@ -4,7 +4,7 @@
       "command": "npx",
       "args": ["-y", "@houtini/gemini-mcp"],
       "env": {
-        "GEMINI_API_KEY": "${GEMINI_API_KEY}"
+        "GEMINI_API_KEY": "AIzaSyAdYwbis9-2-eLCY8Lmf1ADYOWkPGH0lN8"
       }
     }
   }
